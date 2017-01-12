@@ -1,9 +1,16 @@
 module Main exposing (..)
 
-import App exposing (..)
 import Html exposing (program)
+import Model exposing (Model, init)
+import Update exposing (update)
+import View exposing (view)
+import Subscription exposing (subscriptions, getPlace)
 
 
-main : Program Never Model Msg
-main =
-    program { view = view, init = init "kalbakken", update = update, subscriptions = subscriptions }
+main : Program Never Model Subscription.Msg
+main = let name = "Kalbakken"
+       in  program { init = (init name, getPlace name)
+                   , update = update
+                   , view = view
+                   , subscriptions = subscriptions
+                   }
